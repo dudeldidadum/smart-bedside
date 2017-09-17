@@ -6,60 +6,48 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class TimeFormatterTest {
+public class DateFormatterTest {
 
    private long UNIX_LOCAL = 481894631000L;
    private long UNIX_UTC = 481901831000L;
    private Calendar calendar;
    private FormatRepository formatRepository;
-   private TimeFormatter formatter;
+   private DateFormatter formatter;
 
    @Test
    public void formatInvalid() throws Exception {
       try {
-         formatter.formatTime(null);
+         formatter.formatDate(null);
          fail();
       } catch (IllegalArgumentException e) {
          //everything ok
       }
+
+      for (String tz : TimeZone.getAvailableIDs()) {
+         System.out.println(tz);
+      }
    }
 
    @Test
-   public void formatTime12Local() throws Exception {
+   public void formatDateDE() throws Exception {
       calendar.setTimeInMillis(UNIX_LOCAL);
-      formatRepository.use12Hours();
-      assertEquals("01:37 PM", formatter.formatTime(calendar));
-   }
+      assertEquals("9. April#Dienstag, 1985", formatter.formatDate(calendar));
 
-   @Test
-   public void formatTime12UTC() throws Exception {
       calendar.setTimeInMillis(UNIX_UTC);
-      formatRepository.use12Hours();
-      assertEquals("03:37 PM", formatter.formatTime(calendar));
+      assertEquals("9. April#Dienstag, 1985", formatter.formatDate(calendar));
    }
 
-   @Test
-   public void formatTime24Local() throws Exception {
-      calendar.setTimeInMillis(UNIX_LOCAL);
-      formatRepository.use24Hours();
-      assertEquals("13:37", formatter.formatTime(calendar));
-   }
 
-   @Test
-   public void formatTime24UTC() throws Exception {
-      calendar.setTimeInMillis(UNIX_UTC);
-      formatRepository.use24Hours();
-      assertEquals("15:37", formatter.formatTime(calendar));
-   }
 
    @Before
    public void init() {
       formatRepository = new FormatRepository();
-      formatter = new TimeFormatter(formatRepository);
+      formatter = new DateFormatter(formatRepository);
       calendar = Calendar.getInstance();
    }
 }

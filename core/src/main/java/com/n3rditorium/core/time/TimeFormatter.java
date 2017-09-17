@@ -5,6 +5,9 @@ import com.n3rditorium.core.time.settings.FormatRepository;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
+
+import static com.n3rditorium.core.time.settings.FormatRepository.TIMEZONE_BERLIN;
 
 public class TimeFormatter {
 
@@ -24,13 +27,14 @@ public class TimeFormatter {
          throw new IllegalArgumentException("calendar must not be null");
       }
       sanitize();
+      dateFormat.setTimeZone(TimeZone.getTimeZone(TIMEZONE_BERLIN));
       return dateFormat.format(calendar.getTime());
    }
 
    private void sanitize() {
       if (dateFormat == null) {
-         dateFormat = new SimpleDateFormat(formatRepository.getCurrentTimeFormat().second,
-               Locale.getDefault());
+         dateFormat =
+               new SimpleDateFormat(formatRepository.getCurrentTimeFormat().second, Locale.GERMANY);
       }
    }
 }

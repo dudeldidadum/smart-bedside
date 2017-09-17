@@ -1,14 +1,21 @@
-package com.n3rditorium.smartbedside.core;
+package com.n3rditorium.smartbedside.injection;
 
 import android.content.Context;
 
-@dagger.Module
-public class ApplicationModule {
+import com.n3rditorium.smartbedside.core.BaseApplication;
+
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
+
+@Module
+public class AndroidModule {
 
    private final BaseApplication application;
    private final Context context;
-   
-   public ApplicationModule(BaseApplication application) {
+
+   public AndroidModule(BaseApplication application) {
       this.application = application;
       this.context = application.getApplicationContext();
    }
@@ -24,5 +31,4 @@ public class ApplicationModule {
    Context provideContext() {
       return context;
    }
-
 }

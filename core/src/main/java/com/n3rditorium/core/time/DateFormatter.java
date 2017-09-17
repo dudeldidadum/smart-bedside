@@ -6,20 +6,20 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class TimeFormatter {
+public class DateFormatter {
 
    private final FormatRepository formatRepository;
    private SimpleDateFormat dateFormat;
 
-   public TimeFormatter(FormatRepository formatRepository) {
+   public DateFormatter(FormatRepository formatRepository) {
       this.formatRepository = formatRepository;
    }
 
    public String formatNow() {
-      return formatTime(Calendar.getInstance());
+      return formatDate(Calendar.getInstance());
    }
 
-   String formatTime(Calendar calendar) {
+   String formatDate(Calendar calendar) {
       if (calendar == null) {
          throw new IllegalArgumentException("calendar must not be null");
       }
@@ -29,8 +29,8 @@ public class TimeFormatter {
 
    private void sanitize() {
       if (dateFormat == null) {
-         dateFormat = new SimpleDateFormat(formatRepository.getCurrentTimeFormat().second,
-               Locale.getDefault());
+         dateFormat =
+               new SimpleDateFormat(formatRepository.getCurrentDateFormat().second, Locale.GERMANY);
       }
    }
 }

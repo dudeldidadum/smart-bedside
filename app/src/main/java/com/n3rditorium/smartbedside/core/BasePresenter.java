@@ -1,4 +1,4 @@
-package com.intive.cultea.beta.core;
+package com.n3rditorium.smartbedside.core;
 
 import android.support.annotation.CallSuper;
 
@@ -8,6 +8,7 @@ public abstract class BasePresenter<V> {
    protected V getView() {
       return view;
    }
+
 
    @CallSuper
    protected void bindView(V view) {

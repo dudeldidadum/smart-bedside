@@ -1,8 +1,6 @@
-package com.intive.cultea.beta.core;
+package com.n3rditorium.smartbedside.injection;
 
-import com.intive.cultea.beta.core.module.AppComponent;
-import com.intive.cultea.beta.core.module.ApplicationModule;
-import com.intive.cultea.beta.core.module.DaggerAppComponent;
+import com.n3rditorium.smartbedside.core.BaseApplication;
 
 public final class Injector {
 
@@ -14,7 +12,7 @@ public final class Injector {
 
    public static void init(BaseApplication application) {
       appComponent = DaggerAppComponent.builder()
-            .applicationModule(new ApplicationModule(application))
+            .androidModule(new AndroidModule(application))
             .build();
    }
 

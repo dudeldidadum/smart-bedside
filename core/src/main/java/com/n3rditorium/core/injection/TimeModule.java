@@ -1,5 +1,6 @@
-package com.n3rditorium.core.time.injection;
+package com.n3rditorium.core.injection;
 
+import com.n3rditorium.core.time.DateFormatter;
 import com.n3rditorium.core.time.TimeFormatter;
 import com.n3rditorium.core.time.settings.FormatRepository;
 
@@ -10,6 +11,11 @@ import dagger.Provides;
 
 @Module
 public class TimeModule {
+
+   @Provides
+   DateFormatter providesDateFormatter(FormatRepository formatRepository) {
+      return new DateFormatter(formatRepository);
+   }
 
    @Provides
    @Singleton

@@ -1,4 +1,4 @@
-package com.intive.cultea.beta.core;
+package com.n3rditorium.smartbedside.core;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -34,20 +34,16 @@ public abstract class BaseView<V, P extends BasePresenter<V>> extends FrameLayou
    protected abstract P createPresenter();
 
    @CallSuper
-   protected void inflatedViews() {
-   }
-
-   @CallSuper
    protected void initialize(Context context, AttributeSet attrs, int defStyleAttr) {
    }
 
    @Override
    protected void onAttachedToWindow() {
       super.onAttachedToWindow();
-      bindPresenter();
       if (!inflated) {
-         inflatedViews();
+         onViewCreated();
       }
+      bindPresenter();
    }
 
    @Override
@@ -61,8 +57,8 @@ public abstract class BaseView<V, P extends BasePresenter<V>> extends FrameLayou
    protected void onFinishInflate() {
       super.onFinishInflate();
       inflated = true;
+      onViewCreated();
       bindPresenter();
-      inflatedViews();
    }
 
    @Override
@@ -83,6 +79,10 @@ public abstract class BaseView<V, P extends BasePresenter<V>> extends FrameLayou
       bundle.putParcelable(this.getClass()
             .getSimpleName(), super.onSaveInstanceState());
       return bundle;
+   }
+
+   @CallSuper
+   protected void onViewCreated() {
    }
 
    @SuppressWarnings ("unchecked")

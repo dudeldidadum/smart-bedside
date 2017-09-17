@@ -32,14 +32,14 @@ public class TimeFormatterTest {
    public void formatTime12Local() throws Exception {
       calendar.setTimeInMillis(UNIX_LOCAL);
       formatRepository.use12Hours();
-      assertEquals("01:37 PM", formatter.formatTime(calendar));
+      assertEquals("1:37 PM", formatter.formatTime(calendar));
    }
 
    @Test
    public void formatTime12UTC() throws Exception {
       calendar.setTimeInMillis(UNIX_UTC);
       formatRepository.use12Hours();
-      assertEquals("03:37 PM", formatter.formatTime(calendar));
+      assertEquals("3:37 PM", formatter.formatTime(calendar));
    }
 
    @Test

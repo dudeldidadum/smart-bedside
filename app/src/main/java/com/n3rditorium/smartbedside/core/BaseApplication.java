@@ -1,8 +1,8 @@
-package com.intive.cultea.beta.core;
+package com.n3rditorium.smartbedside.core;
 
 import android.app.Application;
 
-import com.intive.cultea.beta.BuildConfig;
+import com.n3rditorium.smartbedside.injection.Injector;
 
 import timber.log.Timber;
 
@@ -12,8 +12,8 @@ public class BaseApplication extends Application {
    public void onCreate() {
       super.onCreate();
       Injector.init(this);
-      if (BuildConfig.DEBUG) {
+      //if (BuildConfig.DEBUG) {
          Timber.plant(new Timber.DebugTree());
-      }
+      //}
    }
 }
