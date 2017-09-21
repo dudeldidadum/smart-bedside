@@ -86,12 +86,10 @@ public class CurrentTimePresenter extends BasePresenter<CurrentTimeContract.View
    }
 
    private void handleFomrattedTime(String s) {
-      Timber.d(s);
       getView().displayCurrentTime(s);
    }
 
    private void handleFormattedDate(String s) {
-      Timber.d(s);
       String[] array = s.split("#");
       getView().displayCurrentDate(array[0], array[1].toUpperCase(Locale.getDefault()));
    }

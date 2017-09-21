@@ -4,10 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.CallSuper;
+import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-public abstract class BaseView<V, P extends BasePresenter<V>> extends FrameLayout {
+public abstract class BaseView<V extends BaseContract.View, P extends BasePresenter<V>>
+      extends FrameLayout implements BaseContract.View {
 
    private boolean inflated;
    private P presenter;
@@ -29,6 +31,14 @@ public abstract class BaseView<V, P extends BasePresenter<V>> extends FrameLayou
 
    public P getPresenter() {
       return presenter;
+   }
+
+   @Override
+   public String getString(@StringRes int resId) {
+      if (getContext() == null) {
+         return "";
+      }
+      return getContext().getString(resId);
    }
 
    protected abstract P createPresenter();
