@@ -1,7 +1,6 @@
-# Readme
+# Smart Bedside
 
 ## Building a smart device with Android Things
-
 
 ### Setup (for Windows)
 
@@ -28,6 +27,12 @@ am startservice -n com.google.wifisetup/.WifiSetupService -a WifiSetupService.Re
 - If your passprase contains special character use Base64 encoding
 - After you have executed the command unplug the ethernet cable! To observe the connectivity state you should connect an external display (e.g. a monitor) using the HDMI output of your device
 
+#### If everything worked
+
+The easiest way to observe the connectivity state of your Pi is to plug in an external display like a monitor using the HDMI output. Then you should see a screen like this:
+![](meta/wifi.png)
+
+**IMPORTANT:** you only see this screen if you have no application installed which uses the manifest-flag: ` <category android:name="android.intent.category.LAUNCHER" />`
 #### Troubleshooting
 - https://stackoverflow.com/questions/46312043/android-things-raspberry-pi-fails-to-connect-to-wifi
 - https://stackoverflow.com/questions/46225713/wifi-setup-not-possible-on-raspberry-pi-3
