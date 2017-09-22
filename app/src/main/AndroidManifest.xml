@@ -2,6 +2,8 @@
 <manifest package="com.n3rditorium.smartbedside"
    xmlns:android="http://schemas.android.com/apk/res/android">
 
+   <uses-permission android:name="com.google.android.things.permission.MANAGE_INPUT_DRIVERS" />
+
    <application
       android:name=".core.BaseApplication"
       android:allowBackup="true"
