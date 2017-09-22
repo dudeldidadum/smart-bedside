@@ -1,6 +1,6 @@
 # Readme
 
-## Android Thing
+## Building a smart device with Android Things
 
 
 ### Setup (for Windows)
