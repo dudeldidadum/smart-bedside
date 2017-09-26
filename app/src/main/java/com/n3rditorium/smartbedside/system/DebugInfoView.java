@@ -3,7 +3,6 @@ package com.n3rditorium.smartbedside.system;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.n3rditorium.smartbedside.R;
 import com.n3rditorium.smartbedside.core.BaseView;
@@ -11,6 +10,7 @@ import com.n3rditorium.smartbedside.core.BaseView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 public class DebugInfoView extends BaseView<DebugInfoContract.View, DebugInfoPresenter>
       implements DebugInfoContract.View {
@@ -31,6 +31,11 @@ public class DebugInfoView extends BaseView<DebugInfoContract.View, DebugInfoPre
    }
 
    @Override
+   public void showNetworkInfo(String networkInfo) {
+      networkInfoView.setText(networkInfo);
+   }
+
+   @Override
    protected DebugInfoPresenter createPresenter() {
       return new DebugInfoPresenter();
    }
@@ -41,9 +46,8 @@ public class DebugInfoView extends BaseView<DebugInfoContract.View, DebugInfoPre
       super.onViewCreated();
    }
 
-   @OnClick(R.id.display_info)
+   @OnClick (R.id.display_info)
    void onClick() {
-      Toast.makeText(getContext(), "TEST", Toast.LENGTH_SHORT)
-            .show();
+      Timber.d("NICE! Clicking my fancy view is working");
    }
 }

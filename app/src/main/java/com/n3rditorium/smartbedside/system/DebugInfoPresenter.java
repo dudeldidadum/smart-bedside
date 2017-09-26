@@ -1,40 +1,57 @@
 package com.n3rditorium.smartbedside.system;
 
-import android.content.Context;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
-
+import com.n3rditorium.core.system.DisplayInfoService;
+import com.n3rditorium.core.system.NetworkInfoService;
 import com.n3rditorium.smartbedside.core.BasePresenter;
+import com.n3rditorium.smartbedside.injection.Injector;
+
+import javax.inject.Inject;
 
 public class DebugInfoPresenter extends BasePresenter<DebugInfoContract.View> {
+
+   @Inject
+   DisplayInfoService displayInfoService;
+   @Inject
+   NetworkInfoService networkInfoService;
 
    @Override
    protected void bindView(DebugInfoContract.View view) {
       super.bindView(view);
-
-      getAndShowisplayMetrics();
+      Injector.getAppComponent()
+            .inject(this);
+      loadAndShowisplayMetrics();
+      loadAndShowNetworkInfo();
    }
 
-   private void getAndShowisplayMetrics() {
-      WindowManager windowManager = (WindowManager) getView().getContext()
-            .getSystemService(Context.WINDOW_SERVICE);
+   private void loadAndShowNetworkInfo() {
+      StringBuilder builder = new StringBuilder();
+      builder.append("Network:\n")
+            .append("SSID: ")
+            .append(networkInfoService.getSSID())
+            .append("\n")
+            .append("Signal: ")
+            .append(networkInfoService.getSignalStrength())
+            .append("\n")
+            .append("IP: ")
+            .append(networkInfoService.getIP())
+            .append("\n");
 
-      DisplayMetrics metrics = new DisplayMetrics();
-      windowManager.getDefaultDisplay()
-            .getMetrics(metrics);
+      getView().showNetworkInfo(builder.toString());
+   }
 
+   private void loadAndShowisplayMetrics() {
       StringBuilder builder = new StringBuilder();
       builder.append("Display:\n")
             .append("width: ")
-            .append(metrics.widthPixels)
+            .append(displayInfoService.getWidth())
             .append("px")
             .append("\n")
             .append("height: ")
-            .append(metrics.heightPixels)
+            .append(displayInfoService.getHeight())
             .append("px")
             .append("\n")
             .append("density: ")
-            .append(metrics.density);
+            .append(displayInfoService.getDensity());
 
       getView().showDisplayInfo(builder.toString());
    }
