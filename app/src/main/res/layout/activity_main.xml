@@ -88,28 +88,52 @@
             android:layout_height="wrap_content"
             tools:text="Lorem ipsum" />
 
+      </LinearLayout>
+   </com.n3rditorium.smartbedside.system.DebugInfoView>
+
+   <com.n3rditorium.smartbedside.system.wifi.WifiInfoView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start|bottom"
+      android:layout_margin="16dp">
+
+      <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="vertical">
+
          <FrameLayout
-            android:layout_width="48dp"
-            android:layout_height="48dp">
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal">
 
             <ImageView
-               android:layout_width="48dp"
-               android:layout_height="48dp"
+               android:layout_width="32dp"
+               android:layout_height="32dp"
+               android:alpha="0.5"
                android:src="@drawable/ic_network"
                android:tint="#888888" />
 
             <ImageView
-               android:layout_width="48dp"
-               android:layout_height="48dp"
-               android:src="@drawable/ic_network"
-               android:transformPivotY="42dp"
-               android:transformPivotX="24dp"
+               android:id="@+id/signal"
+               android:layout_width="32dp"
+               android:layout_height="32dp"
                android:scaleX="0.5"
-               android:scaleY="0.5" />
-
+               android:scaleY="0.5"
+               android:src="@drawable/ic_network"
+               android:transformPivotX="16dp"
+               android:transformPivotY="28dp" />
          </FrameLayout>
 
+         <TextView
+            android:id="@+id/ssid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@android:color/white"
+            android:textSize="10sp" />
       </LinearLayout>
-   </com.n3rditorium.smartbedside.system.DebugInfoView>
+
+   </com.n3rditorium.smartbedside.system.wifi.WifiInfoView>
 
 </FrameLayout>
