@@ -1,6 +1,9 @@
 package com.n3rditorium.smartbedside.injection;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
+import android.view.WindowManager;
 
 import com.n3rditorium.smartbedside.core.BaseApplication;
 
@@ -27,8 +30,25 @@ public class AndroidModule {
    }
 
    @Provides
+   ConnectivityManager provideConnectivityManager(Context context) {
+      return (ConnectivityManager) context.getApplicationContext()
+            .getSystemService(Context.CONNECTIVITY_SERVICE);
+   }
+
+   @Provides
+   public WifiManager provideWifiManager(Context context) {
+      return (WifiManager) context.getApplicationContext()
+            .getSystemService(Context.WIFI_SERVICE);
+   }
+   @Provides
    @Singleton
    Context provideContext() {
       return context;
+   }
+
+   @Provides
+   WindowManager provideWindowManager(Context context) {
+      return (WindowManager) context.getApplicationContext()
+            .getSystemService(Context.WINDOW_SERVICE);
    }
 }

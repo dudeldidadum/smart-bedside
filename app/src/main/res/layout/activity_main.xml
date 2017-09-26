@@ -65,8 +65,8 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="right|center_vertical"
-      android:background="#997b7b7b"
       android:layout_margin="16dp"
+      android:background="#997b7b7b"
       android:padding="12dp">
 
       <LinearLayout
@@ -87,6 +87,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Lorem ipsum" />
+
+         <FrameLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp">
+
+            <ImageView
+               android:layout_width="48dp"
+               android:layout_height="48dp"
+               android:src="@drawable/ic_network"
+               android:tint="#888888" />
+
+            <ImageView
+               android:layout_width="48dp"
+               android:layout_height="48dp"
+               android:src="@drawable/ic_network"
+               android:transformPivotY="42dp"
+               android:transformPivotX="24dp"
+               android:scaleX="0.5"
+               android:scaleY="0.5" />
+
+         </FrameLayout>
+
       </LinearLayout>
    </com.n3rditorium.smartbedside.system.DebugInfoView>
 
