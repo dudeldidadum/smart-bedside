@@ -1,10 +1,12 @@
 package com.n3rditorium.smartbedside;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 
-import timber.log.Timber;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,11 +14,17 @@ public class MainActivity extends AppCompatActivity {
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
+      ButterKnife.bind(this);
+
+      checkWriteableSettings();
    }
 
-   @Override
-   public boolean onKeyDown(int keyCode, KeyEvent event) {
-      Timber.d("wuuhuuu!! Touch is working");
-      return super.onKeyDown(keyCode, event);
+   private void checkWriteableSettings() {
+      if (!Settings.System.canWrite(this)) {
+         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+         intent.setData(Uri.parse("package:" + this.getPackageName()));
+         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+         startActivity(intent);
+      }
    }
 }

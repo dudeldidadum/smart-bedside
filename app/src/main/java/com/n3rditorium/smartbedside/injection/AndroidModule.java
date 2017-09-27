@@ -1,5 +1,6 @@
 package com.n3rditorium.smartbedside.injection;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
@@ -24,6 +25,12 @@ public class AndroidModule {
    }
 
    @Provides
+   public WifiManager provideWifiManager(Context context) {
+      return (WifiManager) context.getApplicationContext()
+            .getSystemService(Context.WIFI_SERVICE);
+   }
+
+   @Provides
    @Singleton
    BaseApplication provideBaseApplication() {
       return application;
@@ -36,10 +43,10 @@ public class AndroidModule {
    }
 
    @Provides
-   public WifiManager provideWifiManager(Context context) {
-      return (WifiManager) context.getApplicationContext()
-            .getSystemService(Context.WIFI_SERVICE);
+   ContentResolver provideContentResolver(Context context) {
+      return context.getContentResolver();
    }
+
    @Provides
    @Singleton
    Context provideContext() {
