@@ -7,6 +7,7 @@ import com.n3rditorium.core.injection.TimeModule;
 import com.n3rditorium.smartbedside.clock.CurrentTimePresenter;
 import com.n3rditorium.smartbedside.core.BaseApplication;
 import com.n3rditorium.smartbedside.system.DebugInfoPresenter;
+import com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessPresenter;
 import com.n3rditorium.smartbedside.system.wifi.WifiInfoPresenter;
 
 import javax.inject.Singleton;
@@ -26,4 +27,6 @@ public interface AppComponent {
    void inject(DebugInfoPresenter debugInfoPresenter);
 
    void inject(WifiInfoPresenter wifiInfoPresenter);
+
+   void inject(AdjustBrightnessPresenter adjustBrightnessPresenter);
 }

@@ -5,17 +5,11 @@
    android:layout_height="match_parent"
    tools:context="com.n3rditorium.smartbedside.MainActivity">
 
-   <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@drawable/sunshine"
-      android:scaleType="centerCrop" />
-
    <com.n3rditorium.smartbedside.clock.CurrentTimeView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:paddingStart="64dp"
-      android:paddingTop="24dp">
+      android:paddingStart="32dp"
+      android:paddingTop="12dp">
 
       <LinearLayout
          android:layout_width="wrap_content"
@@ -26,11 +20,7 @@
             android:id="@+id/current_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:shadowColor="#5d5b5b5b"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="16"
+            android:fontFamily="serif-monospace"
             android:textColor="#fefefe"
             android:textSize="128sp" />
 
@@ -39,10 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-16dp"
-            android:shadowColor="#5d5b5b5b"
-            android:shadowDx="4"
-            android:shadowDy="4"
-            android:shadowRadius="16"
+            android:fontFamily="sans-serif-condensed"
             android:textColor="#fefefe"
             android:textSize="48sp" />
 
@@ -50,12 +37,9 @@
             android:id="@+id/current_date_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shadowColor="#5d5b5b5b"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="8"
             android:textColor="#fefefe"
-            android:textSize="24sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
       </LinearLayout>
 
@@ -64,7 +48,7 @@
    <com.n3rditorium.smartbedside.system.DebugInfoView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="right|center_vertical"
+      android:layout_gravity="end|top"
       android:layout_margin="16dp"
       android:background="#997b7b7b"
       android:padding="12dp">
@@ -91,49 +75,49 @@
       </LinearLayout>
    </com.n3rditorium.smartbedside.system.DebugInfoView>
 
-   <com.n3rditorium.smartbedside.system.wifi.WifiInfoView
-      android:layout_width="wrap_content"
+   <LinearLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="start|bottom"
-      android:layout_margin="16dp">
+      android:background="#66000000"
+      android:padding="16dp"
 
-      <LinearLayout
+      android:orientation="horizontal">
+
+      <include layout="@layout/wifi_info_view" />
+
+      <Space
+         android:layout_width="16dp"
+         android:layout_height="wrap_content" />
+
+      <com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:orientation="vertical">
+         tools:showIn="@layout/activity_main">
 
-         <FrameLayout
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="center_horizontal">
-
-            <ImageView
-               android:layout_width="32dp"
-               android:layout_height="32dp"
-               android:alpha="0.5"
-               android:src="@drawable/ic_network"
-               android:tint="#888888" />
+         <LinearLayout
+            android:id="@+id/adjust_brightness"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:orientation="vertical">
 
             <ImageView
-               android:id="@+id/signal"
-               android:layout_width="32dp"
-               android:layout_height="32dp"
-               android:scaleX="0.5"
-               android:scaleY="0.5"
-               android:src="@drawable/ic_network"
-               android:transformPivotX="16dp"
-               android:transformPivotY="28dp" />
-         </FrameLayout>
+               android:layout_width="36dp"
+               android:layout_height="36dp"
+               android:layout_gravity="center_horizontal"
+               android:src="@drawable/ic_brightness" />
 
-         <TextView
-            android:id="@+id/ssid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textColor="@android:color/white"
-            android:textSize="10sp" />
-      </LinearLayout>
+            <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="2dp"
+               android:gravity="center_horizontal"
+               android:text="@string/settings_label_brightness"
+               android:textColor="@android:color/white"
+               android:textSize="10sp" />
 
-   </com.n3rditorium.smartbedside.system.wifi.WifiInfoView>
-
+         </LinearLayout>
+      </com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView>
+   </LinearLayout>
 </FrameLayout>

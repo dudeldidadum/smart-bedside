@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.n3rditorium.smartbedside.system.wifi.WifiInfoView xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   tools:showIn="@layout/activity_main">
+
+   <LinearLayout
+      android:layout_width="64dp"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <FrameLayout
+         android:layout_width="36dp"
+         android:layout_height="36dp"
+         android:layout_gravity="center_horizontal">
+
+         <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:alpha="0.5"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_network"
+            android:tint="#888888" />
+
+         <ImageView
+            android:id="@+id/signal"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_network"
+            android:transformPivotX="18dp"
+            android:transformPivotY="30dp" />
+      </FrameLayout>
+
+      <TextView
+         android:id="@+id/ssid"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="2dp"
+         android:gravity="center_horizontal"
+         android:textColor="@android:color/white"
+         android:textSize="10sp" />
+   </LinearLayout>
+
+</com.n3rditorium.smartbedside.system.wifi.WifiInfoView>
+
+   

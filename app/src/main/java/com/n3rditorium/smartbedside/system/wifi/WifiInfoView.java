@@ -30,26 +30,9 @@ public class WifiInfoView extends BaseView<WifiInfoContract.View, WifiInfoPresen
 
    @Override
    public void displaySignalStrength(int signalStrength) {
-      float scale;
-      switch (signalStrength) {
-         case 0:
-            scale = 0.0f;
-            break;
-         case 1:
-            scale = 0.2f;
-            break;
-         case 2:
-            scale = 0.4f;
-            break;
-         case 3:
-            scale = 0.6f;
-            break;
-         case 4:
-            scale = 0.8f;
-            break;
-         case 5:
-         default:
-            scale = 1.0f;
+      float scale = 0.25f *signalStrength;
+      if (scale > 1.f){
+         scale = 1.f;
       }
       signalView.setScaleX(scale);
       signalView.setScaleY(scale);
