@@ -1,14 +1,11 @@
-package com.n3rditorium.smartbedside.system.brightness;
+package com.n3rditorium.smartbedside.system.settings;
 
 import com.n3rditorium.common.mvp.BaseContract;
 
-public interface AdjustBrightnessContract {
+public interface SettingsContract {
 
    interface View extends BaseContract.View {
 
-      void displayCurrentBrightness(int brightness);
-
-      void hideAdjustBrightnessView();
 
    }
 }

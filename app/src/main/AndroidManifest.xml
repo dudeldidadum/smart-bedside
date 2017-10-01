@@ -4,6 +4,7 @@
 
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
    <uses-feature
       android:glEsVersion="0x00020000"
@@ -42,6 +43,7 @@
          </intent-filter>
       </activity>
 
+      <service android:name=".system.systemui.SystemBarService" />
    </application>
 
 </manifest>

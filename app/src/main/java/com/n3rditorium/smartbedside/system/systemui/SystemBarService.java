@@ -1,4 +1,4 @@
-package com.n3rditorium.systemui;
+package com.n3rditorium.smartbedside.system.systemui;
 
 import android.app.Service;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.n3rditorium.smartbedside.R;
 
 public class SystemBarService extends Service {
 
@@ -34,7 +36,7 @@ public class SystemBarService extends Service {
       final WindowManager.LayoutParams params =
             new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
                   WindowManager.LayoutParams.WRAP_CONTENT,
-                  WindowManager.LayoutParams.TYPE_STATUS_BAR,
+                  WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                   WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
 
       //Specify the chat head position
@@ -45,6 +47,8 @@ public class SystemBarService extends Service {
       windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
       windowManager.addView(systemBarView, params);
    }
+
+
 
    @Override
    public void onDestroy() {

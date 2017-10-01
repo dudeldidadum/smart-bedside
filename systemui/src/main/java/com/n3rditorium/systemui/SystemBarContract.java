@@ -1,13 +1,10 @@
-package com.n3rditorium.smartbedside.system.wifi;
+package com.n3rditorium.systemui;
 
 import com.n3rditorium.common.mvp.BaseContract;
 
-public interface WifiInfoContract {
+public interface SystemBarContract {
 
    interface View extends BaseContract.View {
 
-      void displaySSID(String ssid);
-
-      void displaySignalStrength(int signalStrength);
    }
 }

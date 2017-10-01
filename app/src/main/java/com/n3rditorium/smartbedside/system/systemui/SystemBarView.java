@@ -1,4 +1,4 @@
-package com.n3rditorium.systemui;
+package com.n3rditorium.smartbedside.system.systemui;
 
 import android.content.Context;
 import android.util.AttributeSet;

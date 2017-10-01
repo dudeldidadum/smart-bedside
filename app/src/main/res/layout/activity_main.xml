@@ -90,34 +90,12 @@
          android:layout_width="16dp"
          android:layout_height="wrap_content" />
 
-      <com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         tools:showIn="@layout/activity_main">
+      <include layout="@layout/adjust_brightness_view" />
 
-         <LinearLayout
-            android:id="@+id/adjust_brightness"
-            android:layout_width="64dp"
-            android:layout_height="match_parent"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:orientation="vertical">
+      <Space
+         android:layout_width="16dp"
+         android:layout_height="wrap_content" />
 
-            <ImageView
-               android:layout_width="36dp"
-               android:layout_height="36dp"
-               android:layout_gravity="center_horizontal"
-               android:src="@drawable/ic_brightness" />
-
-            <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="2dp"
-               android:gravity="center_horizontal"
-               android:text="@string/settings_label_brightness"
-               android:textColor="@android:color/white"
-               android:textSize="10sp" />
-
-         </LinearLayout>
-      </com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView>
+      <include layout="@layout/open_settings_view" />
    </LinearLayout>
 </FrameLayout>

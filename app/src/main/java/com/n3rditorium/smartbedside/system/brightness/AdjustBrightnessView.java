@@ -21,6 +21,7 @@ public class AdjustBrightnessView
    public void displayCurrentBrightness(int brightness) {
       Timber.d("current brightness &d", brightness);
       // TODO
+
    }
 
    @Override

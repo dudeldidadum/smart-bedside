@@ -1,4 +1,5 @@
 <resources>
    <string name="app_name">SmartBedside</string>
    <string name="settings_label_brightness">Helligkeit</string>
+   <string name="settings_label_open">Einstellungen</string>
 </resources>
