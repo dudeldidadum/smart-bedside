@@ -1,6 +1,6 @@
 package com.n3rditorium.smartbedside.system.wifi;
 
-import com.n3rditorium.smartbedside.core.BaseContract;
+import com.n3rditorium.common.mvp.BaseContract;
 
 public interface WifiInfoContract {
 

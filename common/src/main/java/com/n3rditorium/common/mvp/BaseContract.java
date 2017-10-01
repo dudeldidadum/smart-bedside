@@ -1,4 +1,4 @@
-package com.n3rditorium.smartbedside.core;
+package com.n3rditorium.common.mvp;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
@@ -10,5 +10,7 @@ public interface BaseContract {
       Context getContext();
 
       String getString(@StringRes int resId);
+
+      String getString(@StringRes int resId, Object... args);
    }
 }

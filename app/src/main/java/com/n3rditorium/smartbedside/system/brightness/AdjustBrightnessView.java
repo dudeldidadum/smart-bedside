@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.n3rditorium.smartbedside.core.BaseView;
+import com.n3rditorium.common.mvp.BaseView;
 
 import butterknife.ButterKnife;
 import timber.log.Timber;

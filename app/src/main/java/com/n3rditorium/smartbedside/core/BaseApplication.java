@@ -12,8 +12,6 @@ public class BaseApplication extends Application {
    public void onCreate() {
       super.onCreate();
       Injector.init(this);
-      //if (BuildConfig.DEBUG) {
-         Timber.plant(new Timber.DebugTree());
-      //}
+      Timber.plant(new Timber.DebugTree());
    }
 }

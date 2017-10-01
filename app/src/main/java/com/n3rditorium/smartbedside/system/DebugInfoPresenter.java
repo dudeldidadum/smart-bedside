@@ -1,8 +1,8 @@
 package com.n3rditorium.smartbedside.system;
 
+import com.n3rditorium.common.mvp.BasePresenter;
 import com.n3rditorium.core.system.DisplayInfoService;
 import com.n3rditorium.core.system.NetworkInfoService;
-import com.n3rditorium.smartbedside.core.BasePresenter;
 import com.n3rditorium.smartbedside.injection.Injector;
 
 import javax.inject.Inject;

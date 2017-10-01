@@ -1,8 +1,8 @@
 package com.n3rditorium.smartbedside.clock;
 
+import com.n3rditorium.common.mvp.BasePresenter;
 import com.n3rditorium.core.time.DateFormatter;
 import com.n3rditorium.core.time.TimeFormatter;
-import com.n3rditorium.smartbedside.core.BasePresenter;
 import com.n3rditorium.smartbedside.injection.Injector;
 
 import java.util.Locale;
