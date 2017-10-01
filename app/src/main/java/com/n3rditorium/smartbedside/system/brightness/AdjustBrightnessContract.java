@@ -9,6 +9,5 @@ public interface AdjustBrightnessContract {
       void displayCurrentBrightness(int brightness);
 
       void hideAdjustBrightnessView();
-
    }
 }

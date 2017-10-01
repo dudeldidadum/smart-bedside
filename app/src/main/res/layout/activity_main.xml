@@ -80,9 +80,9 @@
       android:layout_height="wrap_content"
       android:layout_gravity="start|bottom"
       android:background="#66000000"
-      android:padding="16dp"
+      android:orientation="horizontal"
 
-      android:orientation="horizontal">
+      android:padding="16dp">
 
       <include layout="@layout/wifi_info_view" />
 

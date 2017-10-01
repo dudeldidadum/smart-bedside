@@ -6,7 +6,14 @@
    tools:showIn="@layout/activity_main">
 
    <LinearLayout
+<<<<<<< HEAD
       android:id="@+id/container"
+=======
+<<<<<<< Updated upstream
+=======
+      android:id="@+id/container"
+>>>>>>> Stashed changes
+>>>>>>> origin/master
       android:layout_width="64dp"
       android:layout_height="wrap_content"
       android:orientation="vertical">

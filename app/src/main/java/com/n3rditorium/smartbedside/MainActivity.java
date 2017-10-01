@@ -4,13 +4,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-
-import com.n3rditorium.common.utils.ExternalIntentUtils;
-import com.n3rditorium.smartbedside.system.systemui.SystemBarService;
 
 import java.util.List;
 
@@ -24,25 +19,11 @@ public class MainActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
       ButterKnife.bind(this);
-
-
-      //queryInstalledApplications();
    }
 
    @Override
    protected void onResume() {
       super.onResume();
-      new Handler().postDelayed(new Runnable() {
-         @Override
-         public void run() {
-            if (Settings.canDrawOverlays(MainActivity.this)) {
-               startService(new Intent(MainActivity.this, SystemBarService.class));
-            } else {
-               ExternalIntentUtils.enableOverlayDrawing(MainActivity.this);
-            }
-         }
-      }, 5000);
-
    }
 
    private void queryInstalledApplications() {
