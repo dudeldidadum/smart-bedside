@@ -1,4 +1,4 @@
-package com.n3rditorium.smartbedside.core;
+package com.n3rditorium.common.mvp;
 
 import android.support.annotation.CallSuper;
 

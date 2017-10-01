@@ -90,6 +90,7 @@
          android:layout_width="16dp"
          android:layout_height="wrap_content" />
 
+<<<<<<< Updated upstream
       <com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -119,5 +120,14 @@
 
          </LinearLayout>
       </com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView>
+=======
+      <include layout="@layout/adjust_brightness_view" />
+
+      <Space
+         android:layout_width="16dp"
+         android:layout_height="wrap_content" />
+
+      <include layout="@layout/open_settings_view" />
+>>>>>>> Stashed changes
    </LinearLayout>
 </FrameLayout>

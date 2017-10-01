@@ -1,4 +1,4 @@
-package com.n3rditorium.smartbedside.core;
+package com.n3rditorium.common.mvp;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -39,6 +39,14 @@ public abstract class BaseView<V extends BaseContract.View, P extends BasePresen
          return "";
       }
       return getContext().getString(resId);
+   }
+
+   @Override
+   public String getString(@StringRes int resId, Object... args) {
+      if (getContext() == null) {
+         return "";
+      }
+      return getContext().getString(resId, args);
    }
 
    protected abstract P createPresenter();

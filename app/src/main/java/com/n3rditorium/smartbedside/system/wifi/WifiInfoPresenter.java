@@ -1,7 +1,12 @@
 package com.n3rditorium.smartbedside.system.wifi;
 
+<<<<<<< Updated upstream
 import com.n3rditorium.core.system.NetworkInfoService;
 import com.n3rditorium.smartbedside.core.BasePresenter;
+=======
+import com.n3rditorium.common.mvp.BasePresenter;
+import com.n3rditorium.core.system.NetworkInfoService;
+>>>>>>> Stashed changes
 import com.n3rditorium.smartbedside.injection.Injector;
 
 import javax.inject.Inject;

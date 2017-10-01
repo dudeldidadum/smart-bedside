@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   tools:showIn="@layout/activity_main">
+
+   <LinearLayout
+      android:id="@+id/adjust_brightness"
+      android:layout_width="64dp"
+      android:layout_height="match_parent"
+      android:background="?android:selectableItemBackgroundBorderless"
+      android:orientation="vertical">
+
+      <ImageView
+         android:layout_width="36dp"
+         android:layout_height="36dp"
+         android:layout_gravity="center_horizontal"
+         android:src="@drawable/ic_brightness" />
+
+      <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="2dp"
+         android:gravity="center_horizontal"
+         android:text="@string/settings_label_brightness"
+         android:textColor="@android:color/white"
+         android:textSize="10sp" />
+
+   </LinearLayout>
+</com.n3rditorium.smartbedside.system.brightness.AdjustBrightnessView>

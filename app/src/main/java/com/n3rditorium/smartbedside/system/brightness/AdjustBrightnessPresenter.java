@@ -3,7 +3,11 @@ package com.n3rditorium.smartbedside.system.brightness;
 import android.content.ContentResolver;
 import android.provider.Settings;
 
+<<<<<<< Updated upstream
 import com.n3rditorium.smartbedside.core.BasePresenter;
+=======
+import com.n3rditorium.common.mvp.BasePresenter;
+>>>>>>> Stashed changes
 import com.n3rditorium.smartbedside.injection.Injector;
 
 import javax.inject.Inject;
