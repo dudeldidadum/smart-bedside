@@ -1,19 +1,30 @@
 package com.n3rditorium.common.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 public class ExternalIntentUtils {
 
+   public static final int PERMISSION_REQUEST_FINE_LOCATION = 2001;
    public static final int SETTINGS_DRAW_OVERLAY_REQUEST_CODE = 1002;
    public static final int SETTINGS_REQUEST_CODE = 1000;
    public static final int SETTINGS_WIFI_REQUEST_CODE = 1001;
    public static final int SETTINGS_WRITEABLE_REQUEST_CODE = 1003;
-
    private static final String TAG = ExternalIntentUtils.class.getSimpleName();
+
+   public static void checkWriteableSettings(Activity source) {
+      if (!Settings.System.canWrite(source)) {
+         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+         intent.setData(Uri.parse("package:" + source.getPackageName()));
+         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+         source.startActivityForResult(intent, SETTINGS_WRITEABLE_REQUEST_CODE);
+      }
+   }
 
    public static void enableOverlayDrawing(Activity source) {
       if (!Settings.canDrawOverlays(source)) {
@@ -23,15 +34,6 @@ public class ExternalIntentUtils {
          Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                Uri.parse("package:" + source.getPackageName()));
          source.startActivityForResult(intent, SETTINGS_DRAW_OVERLAY_REQUEST_CODE);
-      }
-   }
-
-   public static void checkWriteableSettings(Activity source) {
-      if (!Settings.System.canWrite(source)) {
-         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-         intent.setData(Uri.parse("package:" + source.getPackageName()));
-         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-         source.startActivityForResult(intent, SETTINGS_WRITEABLE_REQUEST_CODE);
       }
    }
 
@@ -51,5 +53,11 @@ public class ExternalIntentUtils {
       } else {
          Log.e(TAG, "settings not available");
       }
+   }
+
+   public static void requestFineLocationPermission(Activity activity) {
+      ActivityCompat.requestPermissions(activity,
+            new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
+            PERMISSION_REQUEST_FINE_LOCATION);
    }
 }

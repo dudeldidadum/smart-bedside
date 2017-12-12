@@ -5,6 +5,7 @@
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
    <uses-feature
       android:glEsVersion="0x00020000"
@@ -24,6 +25,14 @@
       <meta-data
          android:name="com.google.android.awareness.API_KEY"
          android:value="@string/awareness_api_key" />
+
+      <meta-data
+         android:name="com.google.android.geo.API_KEY"
+         android:value="@string/awareness_api_key" />
+
+      <meta-data
+         android:name="com.google.android.nearby.messages.API_KEY"
+         android:value="@string/awareness_nearby_api_key" />
 
       <uses-library
          android:name="com.google.android.things"
