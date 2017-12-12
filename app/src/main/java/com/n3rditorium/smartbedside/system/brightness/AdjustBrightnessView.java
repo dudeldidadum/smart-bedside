@@ -19,7 +19,7 @@ public class AdjustBrightnessView
 
    @Override
    public void displayCurrentBrightness(int brightness) {
-      Timber.d("current brightness &d", brightness);
+      Timber.d("current brightness % d", brightness);
       // TODO
    }
 

@@ -1,24 +1,21 @@
 package com.n3rditorium.smartbedside;
 
 import android.Manifest;
-import android.app.PendingIntent;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.snapshot.PlacesResponse;
 import com.google.android.gms.awareness.snapshot.WeatherResponse;
 import com.google.android.gms.awareness.state.Weather;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.PlaceLikelihood;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,26 +28,26 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
-   private GoogleApiClient client;
-   private PendingIntent pendingIntent;
-
    @Override
-   public void onRequestPermissionsResult(int requestCode, String permissions[],
-         int[] grantResults) {
+   public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+         @NonNull int[] grantResults) {
       switch (requestCode) {
          case ExternalIntentUtils.PERMISSION_REQUEST_FINE_LOCATION: {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                requestWeather();
+               requestPlaces();
             } else {
+               Timber.e("permission denied, boo!");
                // permission denied, boo! Disable the
                // functionality that depends on this permission.
             }
             return;
          }
-
-         // other 'case' lines to check for other
-         // permissions this app might request
+         default:
+            Timber.d("other permission results should be handles here");
+            // other 'case' lines to check for other
+            // permissions this app might request
       }
    }
 
@@ -96,30 +93,11 @@ public class MainActivity extends AppCompatActivity {
       for (PackageInfo info : apps) {
          CharSequence label = info.applicationInfo.loadLabel(getPackageManager());
          Timber.i("#%d - %s (%s)%s", i++, label, info.packageName, info.versionName);
-         if (TextUtils.equals("com.android.settings", info.packageName)) {
-            Intent launchApp = getPackageManager().getLaunchIntentForPackage(info.packageName);
-            //    startActivity(launchApp);
-         }
       }
    }
 
-   @SuppressWarnings ("MissingPermission")
-   private void requestWeather() {
-      client = new GoogleApiClient.Builder(this).addApi(Awareness.API)
-            .enableAutoManage(this, 1, null)
-            .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-               @Override
-               public void onConnected(@Nullable Bundle bundle) {
-                  Timber.d("GoogleApiClient connected");
-               }
-
-               @Override
-               public void onConnectionSuspended(int i) {
-                  Timber.e("GoogleApiClient connection suspended");
-               }
-            })
-            .build();
-
+   @SuppressLint ("MissingPermission")
+   private void requestPlaces() {
       Awareness.getSnapshotClient(this)
             .getPlaces()
             .addOnSuccessListener(new OnSuccessListener<PlacesResponse>() {
@@ -142,7 +120,10 @@ public class MainActivity extends AppCompatActivity {
                   Timber.e(e, "could not get places");
                }
             });
+   }
 
+   @SuppressWarnings ("MissingPermission")
+   private void requestWeather() {
       Awareness.getSnapshotClient(this)
             .getWeather()
             .addOnSuccessListener(new OnSuccessListener<WeatherResponse>() {
