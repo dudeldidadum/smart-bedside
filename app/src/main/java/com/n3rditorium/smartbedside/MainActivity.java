@@ -15,12 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.PlacesResult;
-import com.google.android.gms.awareness.snapshot.WeatherResult;
+import com.google.android.gms.awareness.snapshot.PlacesResponse;
+import com.google.android.gms.awareness.snapshot.WeatherResponse;
 import com.google.android.gms.awareness.state.Weather;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.places.PlaceLikelihood;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.n3rditorium.common.utils.ExternalIntentUtils;
 
 import java.util.List;
@@ -119,40 +120,42 @@ public class MainActivity extends AppCompatActivity {
             })
             .build();
 
-      Awareness.SnapshotApi.getPlaces(client)
-            .setResultCallback(new ResultCallback<PlacesResult>() {
+      Awareness.getSnapshotClient(this)
+            .getPlaces()
+            .addOnSuccessListener(new OnSuccessListener<PlacesResponse>() {
                @Override
-               public void onResult(@NonNull PlacesResult placesResult) {
-                  Timber.d("Places result received: " + placesResult.getStatus());
-                  Timber.d("Places result code" + placesResult.getStatus()
-                        .getStatusCode());
-                  Timber.d("Places result message " + placesResult.getStatus()
-                        .getStatusMessage());
-                  if (placesResult.getStatus()
-                        .isSuccess() && placesResult.getPlaceLikelihoods() != null) {
-                     List<PlaceLikelihood> places = placesResult.getPlaceLikelihoods();
-                     for (PlaceLikelihood place : places) {
-                        Timber.d("Place: " + place.getPlace());
-                     }
+               public void onSuccess(PlacesResponse placesResponse) {
+                  List<PlaceLikelihood> places = placesResponse.getPlaceLikelihoods();
+                  if (places == null || places.isEmpty()) {
+                     Timber.e("response has no places");
+                     return;
                   }
+                  for (PlaceLikelihood place : places) {
+                     Timber.d("Place: %s", place.getPlace()
+                           .getName());
+                  }
+               }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+               @Override
+               public void onFailure(@NonNull Exception e) {
+                  Timber.e(e, "could not get places");
                }
             });
 
-      Awareness.SnapshotApi.getWeather(client)
-            .setResultCallback(new ResultCallback<WeatherResult>() {
+      Awareness.getSnapshotClient(this)
+            .getWeather()
+            .addOnSuccessListener(new OnSuccessListener<WeatherResponse>() {
                @Override
-               public void onResult(@NonNull WeatherResult weatherResult) {
-                  Timber.d("Weather result received: " + weatherResult.getStatus());
-                  Timber.d("Weather result code" + weatherResult.getStatus()
-                        .getStatusCode());
-                  Timber.d("Weather result message " + weatherResult.getStatus()
-                        .getStatusMessage());
-                  if (weatherResult.getStatus()
-                        .isSuccess()) {
-                     Weather weather = weatherResult.getWeather();
-                     Timber.d("weather: " + weather);
-                     int[] conditions = weather.getConditions();
-                  }
+               public void onSuccess(WeatherResponse weatherResponse) {
+                  Weather weather = weatherResponse.getWeather();
+                  Timber.d("weather: %s", weather);
+               }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+               @Override
+               public void onFailure(@NonNull Exception e) {
+                  Timber.e(e, "could not get weather");
                }
             });
    }
