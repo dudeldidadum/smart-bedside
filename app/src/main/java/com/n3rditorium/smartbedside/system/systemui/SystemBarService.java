@@ -45,15 +45,15 @@ public class SystemBarService extends Service {
 
       //Add the view to the window
       windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-      windowManager.addView(systemBarView, params);
+      if (windowManager != null) {
+         windowManager.addView(systemBarView, params);
+      }
    }
-
-
 
    @Override
    public void onDestroy() {
       super.onDestroy();
-      if (systemBarView != null) {
+      if (systemBarView != null && windowManager != null) {
          windowManager.removeView(systemBarView);
       }
    }

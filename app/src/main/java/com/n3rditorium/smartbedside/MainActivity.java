@@ -1,7 +1,6 @@
 package com.n3rditorium.smartbedside;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -12,13 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.awareness.Awareness;
-import com.google.android.gms.awareness.snapshot.PlacesResponse;
-import com.google.android.gms.awareness.snapshot.WeatherResponse;
-import com.google.android.gms.awareness.state.Weather;
-import com.google.android.gms.location.places.PlaceLikelihood;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.n3rditorium.common.utils.ExternalIntentUtils;
 
 import java.util.List;
@@ -35,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
          case ExternalIntentUtils.PERMISSION_REQUEST_FINE_LOCATION: {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-               requestWeather();
-               requestPlaces();
+               // requestWeather();
+               // requestPlaces();
             } else {
                Timber.e("permission denied, boo!");
                // permission denied, boo! Disable the
@@ -61,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
       if (!isFineLocationGranted()) {
          ExternalIntentUtils.requestFineLocationPermission(this);
       } else {
-         requestWeather();
+         //requestWeather();
       }
    }
 
@@ -96,48 +88,29 @@ public class MainActivity extends AppCompatActivity {
       }
    }
 
-   @SuppressLint ("MissingPermission")
-   private void requestPlaces() {
-      Awareness.getSnapshotClient(this)
-            .getPlaces()
-            .addOnSuccessListener(new OnSuccessListener<PlacesResponse>() {
-               @Override
-               public void onSuccess(PlacesResponse placesResponse) {
-                  List<PlaceLikelihood> places = placesResponse.getPlaceLikelihoods();
-                  if (places == null || places.isEmpty()) {
-                     Timber.e("response has no places");
-                     return;
-                  }
-                  for (PlaceLikelihood place : places) {
-                     Timber.d("Place: %s", place.getPlace()
-                           .getName());
-                  }
-               }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-               @Override
-               public void onFailure(@NonNull Exception e) {
-                  Timber.e(e, "could not get places");
-               }
-            });
-   }
+   /**
+    @SuppressLint ("MissingPermission")
+    private void requestPlaces() {
+    Awareness.getSnapshotClient(this)
+    .getPlaces()
+    .addOnSuccessListener(new OnSuccessListener<PlacesResponse>() {
+    @Override public void onSuccess(PlacesResponse placesResponse) {
+    List<PlaceLikelihood> places = placesResponse.getPlaceLikelihoods();
+    if (places == null || places.isEmpty()) {
+    Timber.e("response has no places");
+    return;
+    }
+    for (PlaceLikelihood place : places) {
+    Timber.d("Place: %s", place.getPlace()
+    .getName());
+    }
+    }
+    })
+    .addOnFailureListener(new OnFailureListener() {
+    @Override public void onFailure(@NonNull Exception e) {
+    Timber.e(e, "could not get places");
+    }
+    });
+    }**/
 
-   @SuppressWarnings ("MissingPermission")
-   private void requestWeather() {
-      Awareness.getSnapshotClient(this)
-            .getWeather()
-            .addOnSuccessListener(new OnSuccessListener<WeatherResponse>() {
-               @Override
-               public void onSuccess(WeatherResponse weatherResponse) {
-                  Weather weather = weatherResponse.getWeather();
-                  Timber.d("weather: %s", weather);
-               }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-               @Override
-               public void onFailure(@NonNull Exception e) {
-                  Timber.e(e, "could not get weather");
-               }
-            });
-   }
 }

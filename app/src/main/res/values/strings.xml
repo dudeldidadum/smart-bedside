@@ -2,4 +2,19 @@
    <string name="app_name">SmartBedside</string>
    <string name="settings_label_brightness">Helligkeit</string>
    <string name="settings_label_open">Einstellungen</string>
+
+   <string name="current_temperature_celsius">%.1f°C</string>
+
+   <string-array name="weather_conditions">
+      <item>unbekannt</item>
+      <item>klar</item>
+      <item>bewölkt</item>
+      <item>nebelig</item>
+      <item>diesig</item>
+      <item>eisig</item>
+      <item>verregnet</item>
+      <item>verschneit</item>
+      <item>stürmisch</item>
+      <item>windig</item>
+   </string-array>
 </resources>

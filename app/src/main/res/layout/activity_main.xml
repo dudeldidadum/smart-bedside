@@ -8,6 +8,7 @@
    <com.n3rditorium.smartbedside.clock.CurrentTimeView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:paddingEnd="32dp"
       android:paddingStart="32dp"
       android:paddingTop="12dp">
 
@@ -20,9 +21,9 @@
             android:id="@+id/current_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="#fefefe"
-            android:textSize="128sp" />
+            android:textSize="128sp"
+            android:textStyle="bold" />
 
          <TextView
             android:id="@+id/current_date_1"
@@ -45,6 +46,38 @@
 
    </com.n3rditorium.smartbedside.clock.CurrentTimeView>
 
+   <com.n3rditorium.smartbedside.weather.CurrentWeatherView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:paddingEnd="32dp"
+      android:paddingStart="32dp"
+      android:paddingTop="24dp">
+
+      <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:gravity="end"
+         android:orientation="vertical">
+
+         <TextView
+            android:id="@+id/current_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#fefefe"
+            android:textSize="48sp" />
+
+         <TextView
+            android:id="@+id/current_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fefefe"
+            android:textSize="24sp" />
+      </LinearLayout>
+
+   </com.n3rditorium.smartbedside.weather.CurrentWeatherView>
+
    <com.n3rditorium.smartbedside.system.DebugInfoView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -54,10 +87,8 @@
       android:padding="12dp">
 
       <LinearLayout
-
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-
          android:orientation="vertical">
 
          <TextView
@@ -81,7 +112,6 @@
       android:layout_gravity="start|bottom"
       android:background="#66000000"
       android:orientation="horizontal"
-
       android:padding="16dp">
 
       <include layout="@layout/wifi_info_view" />
