@@ -30,11 +30,11 @@ public class CurrentTimePresenter extends BasePresenter<CurrentTimeContract.View
       Injector.getAppComponent()
             .inject(this);
 
-      handleFomrattedTime(timeFormatter.formatNow());
+      handleFormattedTime(timeFormatter.formatNow());
       createTimeObservable().subscribe(new Action1<String>() {
          @Override
          public void call(String s) {
-            handleFomrattedTime(s);
+            handleFormattedTime(s);
          }
       }, new Action1<Throwable>() {
          @Override
@@ -85,12 +85,12 @@ public class CurrentTimePresenter extends BasePresenter<CurrentTimeContract.View
                   });
    }
 
-   private void handleFomrattedTime(String s) {
-      getView().displayCurrentTime(s);
+   private void handleFormattedDate(String formattedDate) {
+      String[] array = formattedDate.split("#");
+      getView().displayCurrentDate(array[0], array[1].toUpperCase(Locale.getDefault()));
    }
 
-   private void handleFormattedDate(String s) {
-      String[] array = s.split("#");
-      getView().displayCurrentDate(array[0], array[1].toUpperCase(Locale.getDefault()));
+   private void handleFormattedTime(String formattedTime) {
+      getView().displayCurrentTime(formattedTime);
    }
 }
