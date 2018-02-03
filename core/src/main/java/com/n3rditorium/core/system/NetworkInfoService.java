@@ -20,6 +20,7 @@ public class NetworkInfoService {
    public String getIP() {
       final WifiInfo connectionInfo = getConnectionInfo();
       return Formatter.formatIpAddress(connectionInfo.getIpAddress());
+
    }
 
    public String getSSID() throws IllegalStateException {

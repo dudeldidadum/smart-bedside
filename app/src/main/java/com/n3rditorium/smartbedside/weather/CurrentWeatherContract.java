@@ -8,6 +8,6 @@ public interface CurrentWeatherContract {
 
       void showCurrentConditions(int[] conditionIndex);
 
-      void showCurrentTemperature(String currentWeather);
+      void showCurrentTemperatureInCelsius(float currentTemperature);
    }
 }

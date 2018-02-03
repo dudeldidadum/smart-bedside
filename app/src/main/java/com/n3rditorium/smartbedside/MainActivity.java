@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
          case ExternalIntentUtils.PERMISSION_REQUEST_FINE_LOCATION: {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-               // requestWeather();
-               // requestPlaces();
+               // TODO notify weather view
+               Timber.d("permission granted");
             } else {
                Timber.e("permission denied, boo!");
                // permission denied, boo! Disable the
@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
       queryInstalledApplications();
       if (!isFineLocationGranted()) {
          ExternalIntentUtils.requestFineLocationPermission(this);
-      } else {
-         //requestWeather();
       }
    }
 
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
       int i = 0;
       for (ResolveInfo info : infoList) {
          CharSequence label = info.loadLabel(getPackageManager());
-         Timber.i("#%d - %s (%s)", i++, label, info.resolvePackageName);
+         Timber.i("#%d - %s (%s) %d - %d ", i++, label, info.resolvePackageName, info.getIconResource(), info.icon);
       }
       Timber.d("query using PackageManager");
       List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);

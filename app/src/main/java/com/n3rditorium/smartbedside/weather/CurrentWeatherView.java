@@ -38,8 +38,9 @@ public class CurrentWeatherView
    }
 
    @Override
-   public void showCurrentTemperature(String temperature) {
-      currentTemperatureView.setText(temperature);
+   public void showCurrentTemperatureInCelsius(float temperature) {
+      String formattedTemperature = getString(R.string.current_temperature_celsius, temperature);
+      currentTemperatureView.setText(formattedTemperature);
    }
 
    @Override

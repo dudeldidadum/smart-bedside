@@ -12,11 +12,11 @@ import com.google.android.gms.awareness.state.Weather;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.n3rditorium.common.mvp.BasePresenter;
-import com.n3rditorium.smartbedside.R;
 
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.TimeInterval;
@@ -24,13 +24,23 @@ import timber.log.Timber;
 
 public class CurrentWeatherPresenter extends BasePresenter<CurrentWeatherContract.View> {
 
+   private Subscription weatherSubscription;
+
    @Override
    protected void bindView(CurrentWeatherContract.View view) {
       super.bindView(view);
       startWeatherObservation();
    }
 
-   private Observable<TimeInterval<Long>> createDateObservable() {
+   @Override
+   protected void unbindView() {
+      super.unbindView();
+      if (weatherSubscription != null && !weatherSubscription.isUnsubscribed()) {
+         weatherSubscription.unsubscribe();
+      }
+   }
+
+   private Observable<TimeInterval<Long>> createTickObservable() {
       return Observable.interval(1, TimeUnit.MINUTES)
             .timeInterval()
             .observeOn(AndroidSchedulers.mainThread());
@@ -45,10 +55,9 @@ public class CurrentWeatherPresenter extends BasePresenter<CurrentWeatherContrac
                @Override
                public void onSuccess(WeatherResponse weatherResponse) {
                   Weather weather = weatherResponse.getWeather();
-                  Timber.d("weather: %s", weather);
-                  String temperature = getView().getString(R.string.current_temperature_celsius,
+
+                  getView().showCurrentTemperatureInCelsius(
                         weather.getTemperature(Weather.CELSIUS));
-                  getView().showCurrentTemperature(temperature);
                   getView().showCurrentConditions(weather.getConditions());
                }
             })
@@ -67,11 +76,16 @@ public class CurrentWeatherPresenter extends BasePresenter<CurrentWeatherContrac
          return;
       }
       loadAndShowCurrentWeather();
-      createDateObservable().subscribe(new Action1<TimeInterval<Long>>() {
+      weatherSubscription = createTickObservable().subscribe(new Action1<TimeInterval<Long>>() {
          @Override
          public void call(TimeInterval<Long> longTimeInterval) {
-            Timber.d("tick for loadAndShowCurrentWeather()");
+            Timber.d("tick - loadAndDisplayCurrentWeather " + longTimeInterval.getIntervalInMilliseconds());
             loadAndShowCurrentWeather();
+         }
+      }, new Action1<Throwable>() {
+         @Override
+         public void call(Throwable throwable) {
+            Timber.e(throwable);
          }
       });
    }
