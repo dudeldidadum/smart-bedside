@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.n3rditorium.smartbedside.led.brightness.SliderView xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   tools:showIn="@layout/activity_main">
+
+   <LinearLayout
+      android:id="@+id/container"
+      android:layout_width="256dp"
+
+      android:layout_height="match_parent"
+      android:background="?android:selectableItemBackgroundBorderless"
+      android:orientation="vertical">
+
+      <SeekBar
+         android:id="@+id/seekbar"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center" />
+
+   </LinearLayout>
+</com.n3rditorium.smartbedside.led.brightness.SliderView>

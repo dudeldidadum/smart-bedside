@@ -4,6 +4,7 @@
    <string name="settings_label_open">Einstellungen</string>
 
    <string name="current_temperature_celsius">%.1f°C</string>
+   <string name="settings_label_light">Licht an/aus</string>
 
    <string-array name="weather_conditions">
       <item>unbekannt</item>

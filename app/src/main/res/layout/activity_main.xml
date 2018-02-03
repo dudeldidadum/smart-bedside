@@ -127,5 +127,17 @@
          android:layout_height="wrap_content" />
 
       <include layout="@layout/open_settings_view" />
+
+      <Space
+         android:layout_width="16dp"
+         android:layout_height="wrap_content" />
+
+      <include layout="@layout/simple_led_toggle" />
+
+      <Space
+         android:layout_width="16dp"
+         android:layout_height="wrap_content" />
+
+      <include layout="@layout/led_brightness" />
    </LinearLayout>
 </FrameLayout>

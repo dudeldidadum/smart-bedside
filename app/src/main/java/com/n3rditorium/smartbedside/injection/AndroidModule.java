@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.view.WindowManager;
 
+import com.google.android.things.pio.PeripheralManagerService;
 import com.n3rditorium.smartbedside.core.BaseApplication;
 
 import javax.inject.Singleton;
@@ -57,5 +58,11 @@ public class AndroidModule {
    WindowManager provideWindowManager(Context context) {
       return (WindowManager) context.getApplicationContext()
             .getSystemService(Context.WINDOW_SERVICE);
+   }
+
+   @Provides
+   @Singleton
+   PeripheralManagerService providePeripheralManagerService() {
+      return new PeripheralManagerService();
    }
 }
