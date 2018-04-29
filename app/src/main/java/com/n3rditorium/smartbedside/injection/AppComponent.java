@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.n3rditorium.core.injection.SystemModule;
 import com.n3rditorium.core.injection.TimeModule;
+import com.n3rditorium.smartbedside.camera.CameraPresenter;
 import com.n3rditorium.smartbedside.clock.CurrentTimePresenter;
 import com.n3rditorium.smartbedside.core.BaseApplication;
 import com.n3rditorium.smartbedside.led.SimpleLedPresenter;
@@ -35,4 +36,6 @@ public interface AppComponent {
    void inject(SimpleLedPresenter simpleLedPresenter);
 
    void inject(SliderPresenter sliderPresenter);
+
+   void inject(CameraPresenter cameraPresenter);
 }

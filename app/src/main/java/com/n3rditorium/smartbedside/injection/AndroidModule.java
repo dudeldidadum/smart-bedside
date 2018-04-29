@@ -7,6 +7,8 @@ import android.net.wifi.WifiManager;
 import android.view.WindowManager;
 
 import com.google.android.things.pio.PeripheralManagerService;
+import com.n3rditorium.smartbedside.camera.CameraHandler;
+import com.n3rditorium.smartbedside.camera.ImagePreprocessor;
 import com.n3rditorium.smartbedside.core.BaseApplication;
 
 import javax.inject.Singleton;
@@ -38,6 +40,12 @@ public class AndroidModule {
    }
 
    @Provides
+   @Singleton
+   CameraHandler provideCameraHandler() {
+      return CameraHandler.getInstance();
+   }
+
+   @Provides
    ConnectivityManager provideConnectivityManager(Context context) {
       return (ConnectivityManager) context.getApplicationContext()
             .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -55,14 +63,19 @@ public class AndroidModule {
    }
 
    @Provides
-   WindowManager provideWindowManager(Context context) {
-      return (WindowManager) context.getApplicationContext()
-            .getSystemService(Context.WINDOW_SERVICE);
+   ImagePreprocessor provideImagePreprocessor() {
+      return new ImagePreprocessor();
    }
 
    @Provides
    @Singleton
    PeripheralManagerService providePeripheralManagerService() {
       return new PeripheralManagerService();
+   }
+
+   @Provides
+   WindowManager provideWindowManager(Context context) {
+      return (WindowManager) context.getApplicationContext()
+            .getSystemService(Context.WINDOW_SERVICE);
    }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 
 public class ExternalIntentUtils {
 
+   public static final int PERMISSION_REQUEST_CAMERA = 2002;
    public static final int PERMISSION_REQUEST_FINE_LOCATION = 2001;
    public static final int SETTINGS_DRAW_OVERLAY_REQUEST_CODE = 1002;
    public static final int SETTINGS_REQUEST_CODE = 1000;
@@ -53,6 +54,11 @@ public class ExternalIntentUtils {
       } else {
          Log.e(TAG, "settings not available");
       }
+   }
+
+   public static void requestCameraPermission(Activity activity) {
+      ActivityCompat.requestPermissions(activity, new String[] { Manifest.permission.CAMERA },
+            PERMISSION_REQUEST_CAMERA);
    }
 
    public static void requestFineLocationPermission(Activity activity) {

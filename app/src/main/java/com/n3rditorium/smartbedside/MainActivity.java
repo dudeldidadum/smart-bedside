@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 
 import com.n3rditorium.common.utils.ExternalIntentUtils;
 
@@ -19,6 +21,15 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
+
+   public void displayImage(final ImageView imageView, final Bitmap bitmap) {
+      runOnUiThread(new Runnable() {
+         @Override
+         public void run() {
+            imageView.setImageBitmap(bitmap);
+         }
+      });
+   }
 
    @Override
    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
@@ -36,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
             }
             return;
          }
+         case ExternalIntentUtils.PERMISSION_REQUEST_CAMERA: {
+            // If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+               // TODO notify camera view
+               Timber.d("permission granted");
+            } else {
+               Timber.e("permission denied, boo!");
+               // permission denied, boo! Disable the
+               // functionality that depends on this permission.
+            }
+            return;
+         }
+
          default:
             Timber.d("other permission results should be handles here");
             // other 'case' lines to check for other
@@ -53,11 +77,20 @@ public class MainActivity extends AppCompatActivity {
       if (!isFineLocationGranted()) {
          ExternalIntentUtils.requestFineLocationPermission(this);
       }
+      if (!isCameraGranted()) {
+         ExternalIntentUtils.requestCameraPermission(this);
+      }
    }
 
    @Override
    protected void onResume() {
       super.onResume();
+   }
+
+   @PermissionChecker.PermissionResult
+   private boolean isCameraGranted() {
+      return ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
+            PackageManager.PERMISSION_GRANTED;
    }
 
    @PermissionChecker.PermissionResult
@@ -75,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
       int i = 0;
       for (ResolveInfo info : infoList) {
          CharSequence label = info.loadLabel(getPackageManager());
-         Timber.i("#%d - %s (%s) %d - %d ", i++, label, info.resolvePackageName, info.getIconResource(), info.icon);
+         Timber.i("#%d - %s (%s) %d - %d ", i++, label, info.resolvePackageName,
+               info.getIconResource(), info.icon);
       }
       Timber.d("query using PackageManager");
       List<PackageInfo> apps = getPackageManager().getInstalledPackages(0);
