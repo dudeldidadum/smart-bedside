@@ -1,14 +1,12 @@
 package com.n3rditorium.smartbedside;
 
 import android.content.Intent;
-<<<<<<< Updated upstream
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
-=======
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
@@ -24,7 +22,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import timber.log.Timber;
->>>>>>> Stashed changes
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
       setContentView(R.layout.activity_main);
       ButterKnife.bind(this);
 
-<<<<<<< Updated upstream
       checkWriteableSettings();
    }
 
@@ -44,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
          intent.setData(Uri.parse("package:" + this.getPackageName()));
          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
          startActivity(intent);
-=======
 
       //queryInstalledApplications();
    }
@@ -86,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             Intent launchApp = getPackageManager().getLaunchIntentForPackage(info.packageName);
             startActivity(launchApp);
          }
->>>>>>> Stashed changes
       }
    }
 }
